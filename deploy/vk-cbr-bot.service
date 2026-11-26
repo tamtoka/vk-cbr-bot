@@ -1,0 +1,21 @@
+[Unit]
+Description=VK bot for Bank of Russia exchange rates
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+WorkingDirectory=/opt/vk-cbr-bot
+EnvironmentFile=/etc/vk-cbr-bot.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/vk-cbr-bot/.venv/bin/python /opt/vk-cbr-bot/bot.py
+Restart=on-failure
+RestartSec=10s
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+
+[Install]
+WantedBy=multi-user.target
